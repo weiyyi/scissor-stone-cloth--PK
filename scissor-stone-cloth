@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct user{
+	int win,use;
+	char name[10];
+};
+void main()
+{
+	int sel,n=5,x=0;
+	struct user u;
+	int practice(struct user u,int n,int x);
+	int fight(struct user u,int n,int x);
+	while(1)
+	{
+		printf(" 1-练习模式 2-实名对战模式 0-退出\n");
+		printf("请选择输入（1、2或0）");
+		scanf("%d",&sel);
+		if(sel==0)break;
+	    if(sel==1){
+           practice(u,n,x);
+           
+		}
+		else if(sel==2){
+			printf("请输入用户名：");
+			scanf("%s",u.name);
+			fight(u,n,x);
+			
+		}
+	    
+
+	}
+}
+int practice(struct user u,int n,int x)
+{
+	int i,com;
+	u.win=0;
+	for(i=1;i<=n;i++){
+		printf("0-scissor 1-stone 2-cloth");
+		printf("请选择：");
+		scanf("%d",&u.use);
+		com=rand()%3;
+		if(com!=u.use) 
+		{
+            if((com==0&&u.use==2)||(com==1&&u.use==0)||(com==2&&u.use==1)) x++;
+			else u.win++;}
+		printf("com=%d\n",com);
+		printf("u.use=%d\n",u.use);
+		printf("win=%d\n",u.win);
+		
+	}
+	printf("5局中你赢了%d局\n",u.win);
+	    if(u.win==x) 
+			   printf("a draw");
+		else if(u.win>x) 
+			   printf("user win");
+		else if(u.win<x) 
+			   printf("com win");
+
+
+
+}
+
+
+
+int fight(struct user u,int n,int x)
+{
+	int i,com;
+	u.win=0;
+	for(i=1;i<=n;i++){
+		printf("0-scissor 1-stone 2-cloth");
+		printf("请选择：");
+		scanf("%d",&u.use);
+		com=rand()%3;
+		if(com==u.use) i--;
+		else if((com==0&&u.use==2)||(com==1&&u.use==0)||(com==2&&u.use==1 )) x++;
+		else u.win++;
+	   	printf("com=%d\n",com);
+		printf("u.use=%d\n",u.use);
+		printf("win=%d\n",u.win);
+	} 
+    printf("5局中你赢了%d局\n",u.win);
+	printf("the rank:\n");
+	printf("the first:");
+	if(u.win>x){ 
+			printf("%s\n",u.name); 
+			printf("the second: com");	}
+	else{
+			printf("com\n"); 
+			printf("the second: %s",u.name);}
+
+}
